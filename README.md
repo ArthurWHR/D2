@@ -1,5 +1,7 @@
 # D2
 
+[中文](README.md) | [English](README_EN.md)
+
 IPv6 活跃地址的离散扩散（Masked Diffusion）生成实验代码。
 
 本项目用 Transformer Encoder + 离散扩散目标学习 `/64` 前缀条件下的接口标识符（IID）分布，
