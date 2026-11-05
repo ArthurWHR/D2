@@ -19,6 +19,8 @@ address-space measurement experiments.
 ├── 3_train_fast6diff.py          # Discrete diffusion model training
 ├── 4_generate_paper_eval.py      # Iterative denoising generation and evaluation
 ├── compute_prefix_entropy.py     # IID entropy statistics per prefix set
+├── common.py                     # Config loading and validation
+├── config.example.py             # Parameter template (copy to config.py)
 └── PROJECT_OUTLINE.md            # Method and implementation notes (Chinese)
 ```
 
@@ -30,6 +32,17 @@ address-space measurement experiments.
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Configuration
+
+Every hyperparameter (model size, training, inference, density and entropy
+thresholds, budgets) is read from `config.py`. The repository ships only a
+template; `config.py` is ignored by git:
+
+```bash
+cp config.example.py config.py
+# then edit config.py with your own values
 ```
 
 ## Data
@@ -64,10 +77,10 @@ python 4_generate_paper_eval.py --prefix_file data/test_prefixes_low.txt --densi
     --total_budget <TOTAL>
 ```
 
-`4_generate_paper_eval.py` loads `models/fast6diff_epoch_20.tar` by default; change
-`MODEL_CKPT` in the script to use another checkpoint.
+`4_generate_paper_eval.py` reads the checkpoint path from `MODEL_CKPT` in `config.py`.
 
 ## Notes
 
 - `data/`, `models/`, and `outputs/` are excluded from version control due to size.
-- Training and inference hyperparameters are configured inside the scripts.
+- Training and inference hyperparameters live in `config.py`; no concrete values
+  are stored in this repository.

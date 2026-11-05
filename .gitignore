@@ -4,6 +4,9 @@ models/
 outputs/
 *.zip
 
+# Local configuration / 本地配置（含具体参数）
+config.py
+
 # Python
 __pycache__/
 *.py[cod]

@@ -17,6 +17,8 @@ IPv6 活跃地址的离散扩散（Masked Diffusion）生成实验代码。
 ├── 3_train_fast6diff.py          # 离散扩散模型训练
 ├── 4_generate_paper_eval.py      # 迭代去噪生成与评估
 ├── compute_prefix_entropy.py     # 各前缀集 IID 熵统计
+├── common.py                     # 配置加载与校验
+├── config.example.py             # 参数模板（复制为 config.py 后填写）
 └── PROJECT_OUTLINE.md            # 方法与实现说明
 ```
 
@@ -28,6 +30,16 @@ IPv6 活跃地址的离散扩散（Masked Diffusion）生成实验代码。
 
 ```bash
 pip install -r requirements.txt
+```
+
+## 配置
+
+所有超参数（模型结构、训练、推理、密度与熵阈值、预算）都从 `config.py` 读取。
+仓库只提供模板，`config.py` 被 `.gitignore` 忽略：
+
+```bash
+cp config.example.py config.py
+# 然后编辑 config.py，填入你自己的取值
 ```
 
 ## 数据准备
@@ -62,10 +74,9 @@ python 4_generate_paper_eval.py --prefix_file data/test_prefixes_low.txt --densi
     --total_budget <TOTAL>
 ```
 
-`4_generate_paper_eval.py` 默认读取 `models/fast6diff_epoch_20.tar`，如需使用其他
-checkpoint，修改脚本中的 `MODEL_CKPT` 即可。
+`4_generate_paper_eval.py` 从 `config.py` 的 `MODEL_CKPT` 读取权重路径。
 
 ## 说明
 
 - `data/`、`models/`、`outputs/` 因体积原因不纳入版本库。
-- 训练与推理的超参数在脚本内配置。
+- 训练与推理的超参数在 `config.py` 中配置，仓库内不含具体取值。
