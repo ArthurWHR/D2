@@ -1,0 +1,16 @@
+# 数据与模型产物（体积过大，不纳入版本库）
+data/
+models/
+outputs/
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 编辑器
+.vscode/
+.idea/
